@@ -8,22 +8,9 @@ import (
 )
 
 func BenchmarkProcessMessage(b *testing.B) {
-	// Create the channels and handler
-	input := make(chan perf.Message)
-	output := make(chan perf.Output)
-	processor := handler.NewProcessor(input, output)
-	outputMessage := perf.Output{}
+	fn := func(msg perf.Output) {}
+	processor := handler.NewProcessor(fn)
 	// Start the handler
-	go processor.Listen()
-	go func() {
-		for {
-			select {
-			case msg := <-output:
-				outputMessage = msg
-				_ = outputMessage
-			}
-		}
-	}()
 	message := perf.Message{
 		Description: "This is a test message",
 		FromUser: perf.User{
@@ -51,8 +38,7 @@ func BenchmarkProcessMessage(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-
 		// Send the message to the handler
-		input <- message
+		processor.Process(message)
 	}
 }

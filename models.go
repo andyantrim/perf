@@ -20,3 +20,7 @@ type Output struct {
 	Description string
 	UserID      int
 }
+
+type Processor interface {
+	Process(msg Message) error
+}
