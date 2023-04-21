@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"fmt"
+
 	"github.com/andyantrim/perf"
 )
 
@@ -17,7 +19,7 @@ func NewProcessor(sendFn func(perf.Output)) *Processor {
 
 func (p *Processor) Process(msg perf.Message) error {
 	// Make a title from the message
-	title := msg.FromUser.Name + " " + msg.ActionType + "ed a " + msg.EntityName
+	title := fmt.Sprintf("%s %sed a %s", msg.FromUser.Name, msg.ActionType, msg.EntityName)
 	// Clean the userIDlist
 	for _, user := range msg.ToList {
 		if user.ID != msg.FromUser.ID && user.ID != 0 {
