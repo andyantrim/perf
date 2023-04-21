@@ -1,0 +1,11 @@
+goos: linux
+goarch: amd64
+pkg: github.com/andyantrim/perf/handler
+cpu: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+BenchmarkProcessMessage-8   	 3427185	       702.3 ns/op
+BenchmarkProcessMessage-8   	 3131352	       730.2 ns/op
+BenchmarkProcessMessage-8   	 3314496	       703.1 ns/op
+BenchmarkProcessMessage-8   	 3523258	       693.0 ns/op
+BenchmarkProcessMessage-8   	 3345877	       723.1 ns/op
+PASS
+ok  	github.com/andyantrim/perf/handler	15.717s
