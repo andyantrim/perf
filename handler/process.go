@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"fmt"
-
 	"github.com/andyantrim/perf"
 )
 
@@ -28,24 +26,16 @@ func (p *Processor) Listen() {
 
 func (p *Processor) ProcessMessage(msg perf.Message) {
 	// Make a title from the message
-	title := fmt.Sprintf("%s %sed a %s", msg.FromUser.Name, msg.ActionType, msg.EntityName)
-
+	title := msg.FromUser.Name + " " + msg.ActionType + "ed a " + msg.EntityName
 	// Clean the userIDlist
-	userIDList := make([]int, 0)
 	for _, user := range msg.ToList {
 		if user.ID != msg.FromUser.ID && user.ID != 0 {
-			userIDList = append(userIDList, user.ID)
+			output := perf.Output{
+				Title:       title,
+				Description: msg.Description,
+				UserID:      user.ID,
+			}
+			p.Output <- output
 		}
 	}
-
-	// Create an output for each user
-	for _, userID := range userIDList {
-		output := perf.Output{
-			Title:       title,
-			Description: msg.Description,
-			UserID:      userID,
-		}
-		p.Output <- output
-	}
-
 }
