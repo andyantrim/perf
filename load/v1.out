@@ -1,0 +1,11 @@
+goos: linux
+goarch: amd64
+pkg: github.com/andyantrim/perf/load
+cpu: 12th Gen Intel(R) Core(TM) i7-12700H
+BenchmarkV1-20    	 3742980	      1605 ns/op
+BenchmarkV1-20    	 3760242	      1604 ns/op
+BenchmarkV1-20    	 3648312	      1617 ns/op
+BenchmarkV1-20    	 3632055	      1634 ns/op
+BenchmarkV1-20    	 3640801	      1644 ns/op
+PASS
+ok  	github.com/andyantrim/perf/load	38.238s
